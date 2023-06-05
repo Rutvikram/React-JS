@@ -4,13 +4,22 @@ import CustomHook from "./../Hooks/customHooks"
 import { Link } from "react-router-dom";
 
 const login = () => {
-    // const [form, setForm]= useState({})
-    // const checkLogin = ()=>{ 
-    //     console.log(form);
-    //     fetch(`http://localhost:5000/posts?username=${form.usernameError}&password=${form.passwordError}`).
-    //     then((res)=>res.json()).then((response)=>{console.log(response);})
-    // }
     const { handleChange, inp, error } = CustomHook({}, { "usernameError": "" }, { "passwordError": "" });
+    // const [form, setForm]= useState({})
+    console.log(inp);
+    const newUser = (event) => {
+        event.preventDefault()
+        console.log(login);
+        // fetch(`http://localhost:5000/posts?username=${login.usernameError}&password=${login.passwordError}`).
+        //     then((res) => res.json()).then((response) => { console.log(response); })
+        const response = fetch("http://localhost:5000/posts", {
+            method: "POST",
+            // headers: {
+            //     "Content-Type": "application/json"
+            // },
+            body: JSON.stringify(inp)
+        });
+    }
     // console.log(handleChange);
     return (
         <>
@@ -49,11 +58,13 @@ const login = () => {
                         {JSON.stringify(inp)}
                         {/* {JSON.stringify(error.usernameError)} */}
                         <form className='setform' action=''>
-                            <input type="text" name='username' onBlur={handleChange} placeholder="Username" autoComplete="off" />
-                            {error.usernameError ? <span style={{color: "red"}}>username is required !</span> : ""}
-                            <input type="password" name='password' onBlur={handleChange} placeholder="Password" autoComplete="off" />
+                            <input type="text" name='username' onBlur={handleChange} placeholder="Username or E-mali" autoComplete="off" required />
+                            {error.usernameError ? <span style={{ color: "red" }}>username is required !</span> : ""}
+                            {/* {error.reqaid} */}
+                            {/* {this.error} */}
+                            <input type="password" name='password' onBlur={handleChange} placeholder="Password" autoComplete="off" required />
                             {/* {JSON.stringify(error.passwordError)} */}
-                            {error.passwordError ? <span style={{color: "red"}}>password is required !</span> : ""}
+                            {error.passwordError ? <span style={{ color: "red" }}>password is required !</span> : ""}
                             <br />
                             <a id="forgot-pass" href="#">Forgot your password?</a>
                             <br />
@@ -69,14 +80,13 @@ const login = () => {
                         <a href="#"><i className="fa-brands fa-apple apple"></i></a>
                         <p>or use your email for registration:</p>
                         <form className='setform' action=''>
-                            <input type="username" onBlur={handleChange} placeholder="Username" autoComplete="off" />
+                            <input name='username' type="username" onBlur={handleChange} placeholder="Username" autoComplete="off" required />
                             <br />
-                            <input type="password" onBlur={handleChange} placeholder="Password" autoComplete="off" />
+                            <input name='email' type="email" onBlur={handleChange} placeholder="E-mali" autoComplete="off" required />
                             <br />
-                            <input type="password" onBlur={handleChange} placeholder="Conform Password" autoComplete="off" />
+                            <input name='password' type="password" onBlur={handleChange} placeholder="Password" autoComplete="off" required />
                             <br />
-                            <input className="submit-btn" type="submit" defaultValue="Sign Up" />
-
+                            <input className="submit-btn" onClick={newUser} type="submit" defaultValue="Sign Up" />
                         </form>
                     </div>
                 </div>

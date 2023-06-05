@@ -1,24 +1,42 @@
 {
-    "posts": [
-    { 
-        "id": 1, 
-        "username": "admin", 
-        "password": "123" 
+  "posts": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "123"
     },
     {
-        "id":2,
-        "username": "user",
-        "password": "456"
+      "id": 2,
+      "username": "user",
+      "password": "456"
     },
     {
-        "id":2,
-        "username": "user2",
-        "password": "4567"
+      "regusername": "rutvik",
+      "email": "rutvik@1123",
+      "password": "12345",
+      "id": 3
+    },
+    {
+      "username": "sidunsk",
+      "email": "aaskoa213@",
+      "password": "asdao",
+      "id": 4
+    },
+    {
+      "username": "sidunsk",
+      "email": "aaskoa213@",
+      "password": "asdao",
+      "id": 5
     }
-
-    ],
-    "comments": [
-      { "id": 1, "body": "some comment", "postId": 1 }
-    ],
-    "profile": { "name": "typicode" }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
   }
+}
