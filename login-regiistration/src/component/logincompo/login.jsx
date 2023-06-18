@@ -1,24 +1,43 @@
 import React, { useState } from 'react';
 import "./login.css"
 import CustomHook from "./../Hooks/customHooks"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const login = () => {
-    const { handleChange, inp, error } = CustomHook({}, { "usernameError": "" }, { "passwordError": "" });
+    const [mydata , setMyData ] = useState()
+    const { handleChange, inp, error } = CustomHook({}, {"usernameError": "" }, { "passwordError": "" });
     // const [form, setForm]= useState({})
     console.log(inp);
+    // const navigate = useNavigate()
     const newUser = (event) => {
         event.preventDefault()
-        console.log(login);
+        // console.log(login);
         // fetch(`http://localhost:5000/posts?username=${login.usernameError}&password=${login.passwordError}`).
         //     then((res) => res.json()).then((response) => { console.log(response); })
         const response = fetch("http://localhost:5000/posts", {
             method: "POST",
-            // headers: {
-            //     "Content-Type": "application/json"
-            // },
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(inp)
+            
         });
+
+    }
+    // const checkLogin = async (event)=>{
+        const checkLogin = async (event) => {
+        event.preventDefault()
+        const response = await axios.get(`http://localhost:5000/users?username=${inp.username}&password=${inp.password}`)
+          .then((resp)=> {
+            setMyData(resp.data)
+            console.log(response);
+          })
+          .catch((error)=> {
+
+            console.log(error.message);
+          });
+
     }
     // console.log(handleChange);
     return (
@@ -69,7 +88,7 @@ const login = () => {
                             <a id="forgot-pass" href="#">Forgot your password?</a>
                             <br />
                             {/* <input className="submit-btn" type="submit" defaultValue="Sign In" /> */}
-                            <button className="submit-btn" defaultValue="Sign In"> Login</button>
+                            <button className="submit-btn" onClick={checkLogin} defaultValue="Sign In"> Login</button>
                         </form>
                     </div>
                     {/* Register Box */}

@@ -1,12 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Sidebar from './sidebar';
 
 const AdminDashbord = () => {
     return (
         <>
-        <div>
-            <h1>Admin Dashbord</h1>
-        </div>
+            <div>
+                <Sidebar />
+                
+            </div>
+            
+            
             <Outlet></Outlet>
         </>
     );
